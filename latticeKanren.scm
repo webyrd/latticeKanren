@@ -191,6 +191,11 @@
 
 ;(define fail (== #f #t))
 
+(define fail
+  (fresh (t)
+    (put t #t)
+    (put t #f)))
+
 ;(define onceo
 ;  (lambda (g)
 ;    (condu
