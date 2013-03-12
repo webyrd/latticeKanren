@@ -6,7 +6,7 @@
      (new (x* ...) g g* ...)]))
 
 ;;; WAT DO???
-(define ==
+#;(define ==
  (lambda (t1 t2)
    (lambdag@ (s)
      ((new ()

@@ -187,12 +187,12 @@
 ;       (let ((x (walk* x s)) ...)
 ;         ((fresh () g g* ...) s))))))
 
-(define succeed (== #f #f))
+;(define succeed (== #f #f))
 
-(define fail (== #f #t))
+;(define fail (== #f #t))
 
-(define onceo
-  (lambda (g)
-    (condu
-      (g succeed)
-      ((== #f #f) fail))))
+;(define onceo
+;  (lambda (g)
+;    (condu
+;      (g succeed)
+;      ((== #f #f) fail))))
