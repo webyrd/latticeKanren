@@ -11,7 +11,7 @@
 ;;; part of mK?
 
 ;;; I'm sure this code can be made more efficient (in particular, all
-;;; those walk*'s are annoying).  I'm just for correctness right now.
+;;; those walk*'s are annoying).  I'm just worried about correctness for now.
 
 (define lub
   (lambda (t1 t2 s)

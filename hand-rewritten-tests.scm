@@ -223,6 +223,7 @@
          ;
          ; To do this, seems like 'lub' would need to be able to call
          ; 'put'.  So 'lub' and 'put' would be mutually recursive.
+         ; Actually, wouldn't that make 'put' identical to unification?
          (appendo d s res))))))
 
 (test-check "appendo-1" 
