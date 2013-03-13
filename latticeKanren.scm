@@ -189,6 +189,11 @@
 
 ;(define succeed (== #f #f))
 
+(define succeed
+  (fresh (t)
+    (put t #f)
+    (put t #f)))
+
 ;(define fail (== #f #t))
 
 (define fail

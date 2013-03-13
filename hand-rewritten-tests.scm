@@ -36,15 +36,21 @@
     (put q #t))
   `())
 
-#!eof
-
 (define g fail)
   
+;(test-check "testc11.tex-4"   
+;  (run* (q) 
+;    succeed 
+;    (== #t q))
+;  (list #t))
+
 (test-check "testc11.tex-4"   
   (run* (q) 
     succeed 
-    (== #t q))
+    (put q #t))
   (list #t))
+
+#!eof
 
 (test-check "testc11.tex-5"   
   (run* (q) 
