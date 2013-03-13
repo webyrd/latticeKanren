@@ -14,6 +14,13 @@
                "Failed: ~a~%Expected: ~a~%Computed: ~a~%"
                'tested-expression expected produced)))))))
 
+
+
+
+
+
+;;; Tests from Chapter 1 of TRS.
+
 (test-check "testc11.tex-1" 
  (run* (q)
    fail)
@@ -184,6 +191,37 @@
       (fresh (x)
         (put x #t))))
   `(_.0))
+
+
+
+;;; So far these tests are boring.  Can we do appendo?
+
+;(define appendo
+;  (lambda (l s out)
+;    (conde
+;      ((== '() l) (== s out))
+;      ((fresh (a d res)
+;         (== `(,a . ,d) l)
+;         (== `(,a . ,res)  out)
+;         (appendo d s res))))))
+
+;;; What if we assume (or require) that the args to appendo are LVars?
+;;; That seems to help, at least some.
+
+(define appendo
+  (lambda (l s out)
+    (conde
+      ((put l '())
+       (put s out) ; need two puts to associate s & out with each other
+       (put out s))
+      ((fresh (a d res)
+         (put l `(,a . ,d))
+         (put out `(,a . ,res))
+         ; Hmm. The problem is that a, d, and res won't be associated with the car & cdr of l & out.
+         ; What if 'put' could in turn call other "sub-puts" if the RHS term contained LVars?
+         ; Would this solve the problem?
+         (appendo d s res))))))
+
 
 #!eof
 
