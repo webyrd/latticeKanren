@@ -231,6 +231,25 @@
       (put q out)))
   '(()))
 
+(test-check "appendo-2"
+  (run* (q)
+    (fresh (l s out)
+      (put l '())
+      (put s '(c d e))
+      (appendo l s out)
+      (put q out)))
+  '((c d e)))
+
+;;; bustado!!!!
+(test-check "appendo-10"
+  (run 5 (q)
+    (fresh (l s out)
+      (put l '(a b c))
+      (put s '(d e))
+      (appendo l s out)
+      (put q out)))
+  '((a b c d e)))
+
 #!eof
 
 (test-check "testc11.tex-16" 
