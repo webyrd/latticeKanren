@@ -50,63 +50,120 @@
     (put q #t))
   (list #t))
 
-#!eof
+;(test-check "testc11.tex-5"   
+;  (run* (q) 
+;    succeed 
+;    (== #t q))
+;  `(#t))
 
 (test-check "testc11.tex-5"   
   (run* (q) 
     succeed 
-    (== #t q))
+    (put q #t))
   `(#t))
+
+;(test-check "testc11.tex-6"   
+;  (run* (r) 
+;    succeed
+;    (== 'corn r))
+;  (list 'corn))
 
 (test-check "testc11.tex-6"   
   (run* (r) 
     succeed
-    (== 'corn r))
+    (put r 'corn))
   (list 'corn))
+
+;(test-check "testc11.tex-7"   
+;  (run* (r) 
+;    succeed
+;    (== 'corn r))
+;  `(corn))
 
 (test-check "testc11.tex-7"   
   (run* (r) 
     succeed
-    (== 'corn r))
+    (put r 'corn))
   `(corn))
+
+;(test-check "testc11.tex-8"   
+;  (run* (r)
+;    fail
+;    (== 'corn r))
+;  `())
 
 (test-check "testc11.tex-8"   
   (run* (r)
     fail
-    (== 'corn r))
+    (put r 'corn))
   `())
+
+;(test-check "testc11.tex-9"   
+;  (run* (q) 
+;    succeed 
+;    (== #f q))
+;  `(#f))
 
 (test-check "testc11.tex-9"   
   (run* (q) 
     succeed 
-    (== #f q))
+    (put q #f))
   `(#f))
+
+;(test-check "testc11.tex-10" 
+;  (run* (x)
+;    (let ((x #f))
+;      (== #t x)))
+;  '())
 
 (test-check "testc11.tex-10" 
   (run* (x)
     (let ((x #f))
-      (== #t x)))
+      (fresh (t)
+        (put t x)
+        (put t #t))))
   '())
+
+;(test-check "testc11.tex-11" 
+;  (run* (q)
+;    (fresh (x)
+;      (== #t x)
+;      (== #t q)))
+;  (list #t))
 
 (test-check "testc11.tex-11" 
   (run* (q)
     (fresh (x)
-      (== #t x)
-      (== #t q)))
+      (put x #t)
+      (put q #t)))
   (list #t))
+
+;(test-check "testc11.tex-12" 
+;  (run* (q)
+;    (fresh (x)
+;      (== x #t)
+;      (== #t q)))
+;  (list #t))
 
 (test-check "testc11.tex-12" 
   (run* (q)
     (fresh (x)
-      (== x #t)
-      (== #t q)))
+      (put #t x)
+      (put q #t)))
   (list #t))
+
+;(test-check "testc11.tex-13" 
+;  (run* (q)
+;    (fresh (x)
+;      (== x #t)
+;      (== q #t)))
+;  (list #t))
 
 (test-check "testc11.tex-13" 
   (run* (q)
     (fresh (x)
-      (== x #t)
-      (== q #t)))
+      (put x #t)
+      (put q #t)))
   (list #t))
 
 (test-check "testc11.tex-14"   
@@ -114,12 +171,21 @@
     succeed)
   (list `_.0))
 
+;(test-check "testc11.tex-15"   
+;  (run* (x)
+;    (let ((x #f))
+;      (fresh (x)
+;        (== #t x))))
+;  `(_.0))
+
 (test-check "testc11.tex-15"   
   (run* (x)
     (let ((x #f))
       (fresh (x)
-        (== #t x))))
+        (put x #t))))
   `(_.0))
+
+#!eof
 
 (test-check "testc11.tex-16" 
   (run* (r)
