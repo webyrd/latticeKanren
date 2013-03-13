@@ -6,12 +6,14 @@
 
 (define put
   (lambda (l t)
-    (lambdag@ (s)
-      (let ([t^ (lub l t s)])
-        (cond
-          [(eq? 'top t^) (mzero)]
-          [else
-           (unit (ext-s-check l t^ s))])))))
+    (if (var? l)
+        (lambdag@ (s)
+          (let ([t^ (lub l t s)])
+            (cond
+              [(eq? 'top t^) (mzero)]
+              [else
+               (unit (ext-s-check l t^ s))])))
+        (error 'put (format "~s is not an LVAR" l)))))
 
 ;;; I'm not worrying about protecting against illegal uses of consume
 ;;; right now.  My uses of consume will be immediately before reification.

@@ -155,7 +155,7 @@
 (test-check "testc11.tex-12" 
   (run* (q)
     (fresh (x)
-      (put #t x)
+      (put x #t)
       (put q #t)))
   (list #t))
 
