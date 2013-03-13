@@ -220,6 +220,9 @@
          ; Hmm. The problem is that a, d, and res won't be associated with the car & cdr of l & out.
          ; What if 'put' could in turn call other "sub-puts" if the RHS term contained LVars?
          ; Would this solve the problem?
+         ;
+         ; To do this, seems like 'lub' would need to be able to call
+         ; 'put'.  So 'lub' and 'put' would be mutually recursive.
          (appendo d s res))))))
 
 (test-check "appendo-1" 
