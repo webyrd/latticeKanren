@@ -222,6 +222,14 @@
          ; Would this solve the problem?
          (appendo d s res))))))
 
+(test-check "appendo-1" 
+  (run* (q)
+    (fresh (l s out)
+      (put l '())
+      (put s '())
+      (appendo l s out)
+      (put q out)))
+  '(()))
 
 #!eof
 
