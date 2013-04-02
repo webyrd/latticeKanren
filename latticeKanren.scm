@@ -180,12 +180,12 @@
          ((a f) (bind* (unit a) g ...)))))))
 
 ;;; Note sure what project means in a world with LVars and get
-;(define-syntax project
-;  (syntax-rules ()
-;    ((_ (x ...) g g* ...)
-;     (lambdag@ (s)
-;       (let ((x (walk* x s)) ...)
-;         ((fresh () g g* ...) s))))))
+(define-syntax project
+  (syntax-rules ()
+    ((_ (x ...) g g* ...)
+     (lambdag@ (s)
+       (let ((x (walk* x s)) ...)
+         ((fresh () g g* ...) s))))))
 
 ;(define succeed (== #f #f))
 

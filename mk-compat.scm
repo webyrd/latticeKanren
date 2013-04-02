@@ -7,9 +7,9 @@
 
 ;;; WAT DO???
 #;(define ==
- (lambda (t1 t2)
-   (lambdag@ (s)
-     ((new ()
-        (put t1 t2)
-        (put t2 t1))
-      s))))
+  (lambda (t1 t2)
+    (lambdag@ (s)
+      ((new ()
+         (put t1 t2)
+         (put t2 t1))
+       s))))

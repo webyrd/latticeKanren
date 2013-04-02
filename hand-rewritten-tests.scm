@@ -207,9 +207,8 @@
 
 ;;; What if we assume (or require) that the args to appendo are LVars?
 ;;; That seems to help, at least some.
-
 (define appendo
-  (lambda (l s out)
+  (lambda (l s out) ; args are assumed to be LVars
     (conde
       ((put l '())
        (put s out) ; need two puts to associate s & out with each other
@@ -250,9 +249,46 @@
     (fresh (l s out)
       (put l '(a b c))
       (put s '(d e))
+
+      (project (l s out)
+        (begin
+          (printf "\nbefore  l: ~s\n s: ~s\n out: ~s\n\n" l s out)
+          succeed))
+      
       (appendo l s out)
+
+      (project (l s out)
+        (begin
+          (printf "\nafter  l: ~s\n s: ~s\n out: ~s\n\n" l s out)
+          succeed))
+      
       (put q out)))
   '((a b c d e)))
+
+
+;;; Ryan's suggested appendo
+(define appendo
+  (lambda (l s out)
+    (conde
+      ((put l '())
+       (put s out) ; need two puts to associate s & out with each other
+       (put out s))
+      ((fresh (a d res)
+         ;; (== l `(,a . ,d))
+         ;; ==> Desugars into ==> 
+         (begin
+           (getWCallback l bottom (lambda (x)
+                                    ;;; this 'if' is only needed in
+                                    ;;; case 'l' is not well typed
+                                    ;;; (that is, 'l' is not a pair)
+                                    ;;; This is already starting to
+                                    ;;; feel like == or unification.
+                                    (if (pair? x) (fail)
+                                        (begin (put a (car x)) (put d (cdr x))))))
+           (getWCallback a bottom (lambda (x) (putCar l x)))
+           (getWCallback d bottom (lambda (x) (putCdr l x))))
+ 	 
+         (put out `(,a . ,res))))))) 
 
 #!eof
 

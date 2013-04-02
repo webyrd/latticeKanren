@@ -13,6 +13,8 @@
 ;;; I'm sure this code can be made more efficient (in particular, all
 ;;; those walk*'s are annoying).  I'm just worried about correctness for now.
 
+;;; Lindsey says that only lub or leq needs to be defined, not both.  Can we define one in terms of the other?
+
 (define lub
   (lambda (t1 t2 s)
     (cond
